@@ -15,6 +15,11 @@ RUN add-apt-repository -y ppa:transmissionbt/ppa && \
     apt-get update && \
     apt-get install -y transmission-daemon
 
+# Clean-up any unneeded files
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/*
+
 VOLUME ["/config"]
 VOLUME ["/download"]
 
