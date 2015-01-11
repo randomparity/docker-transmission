@@ -19,13 +19,12 @@ Assumptions
 
 I use a NAS with a "download" share with the following structure:
 
-  Download
+  Download                    - Completed downloads
   Download\Torrents
-  DOwnload\Torrents\Complete  - Completed downloads
   Donwload\Torrents\Watch     - Watch directory for .torrent files
   Download\Torrents\Working   - Working directory where "in progress" files are located
 
-I want to run Transmission as the same user, "sysadmin" in my case, used to mount the NAS share to enforce some level of security.
+I want to run Transmission as the same user, "sysadmin" in my case, used to mount the NAS share to enforce some level of security.  All Docker configuration files are mounted from `/etc/docker/<container>`.
 
 Quick-start
 -----------

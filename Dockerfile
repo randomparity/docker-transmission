@@ -31,5 +31,5 @@ EXPOSE 51413
 USER sysadmin
 
 # Run Transmission in the foreground, as "sysadmin", with the following defaults
-CMD [ "--allowed", "127.*,10.*,192.168.*,172.16.*,172.17.*,172.18.*,172.19.*,172.20.*,172.21.*,172.22.*,172.23.*,172.24.*,172.25.*,172.26.*,172.27.*,172.28.*,172.29.*,172.30.*,172.31.*,169.254.*", "-c", "/download/Watch", "--encryption-preferred", "--foreground", "--config-dir", "/config", "--incomplete-dir", "/download/Working", "--dht", "--no-auth", "--download-dir", "/download/Complete" ]
+CMD [ "--allowed", "127.*,10.*,192.168.*,172.16.*,172.17.*,172.18.*,172.19.*,172.20.*,172.21.*,172.22.*,172.23.*,172.24.*,172.25.*,172.26.*,172.27.*,172.28.*,172.29.*,172.30.*,172.31.*,169.254.*", "-c", "/download/Torrents", "--encryption-preferred", "--foreground", "--config-dir", "/config", "--incomplete-dir", "/download/Torrents/Working", "--dht", "--no-auth", "--download-dir", "/download" ]
 ENTRYPOINT ["/usr/bin/transmission-daemon"]
