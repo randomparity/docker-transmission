@@ -1,19 +1,18 @@
-FROM ubuntu:trusty
+FROM randomparity/docker-supervisor:latest
 
 MAINTAINER David Christensen <randomparity@gmail.com>
+ENV LAST_UPDATE 2014-01-12
 
-# Remove error messages like "debconf: unable to initialize frontend: Dialog":
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+# We depend on the FROM container to have the relevant updates
+# installed thus we don't take care of that here.
 
-# Fetch/install latest updates and install needed tools
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y software-properties-common supervisor
+# Install needed tools
+RUN apt-get install -qy software-properties-common
 
 # Add the Transmission repository and install the transmission application
 RUN add-apt-repository -y ppa:transmissionbt/ppa && \
-    apt-get update && \
-    apt-get install -y transmission-daemon
+    apt-get -qq update && \
+    apt-get -qy install transmission-daemon
 
 # Clean-up any unneeded files
 RUN apt-get clean && \
@@ -23,21 +22,21 @@ RUN apt-get clean && \
 VOLUME ["/config"]
 VOLUME ["/download"]
 
+# Used by transmission daemon to set default configuration data location
 ENV TRANSMISSION_HOME /config
 
-EXPOSE 9091
-EXPOSE 51413
+EXPOSE 9091 51413
 
-# Copy the supervisord configuration file into the container
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Copy the supervisord configuration files into the container
+COPY transmission.conf /etc/supervisor/conf.d/transmission.conf
+COPY cron.conf /etc/supervisor/conf.d/cron.conf
 
 # Copy the torrent scan script into the container and make it executable
-COPY torrent-scan.sh /
-RUN chmod +x /torrent-scan.sh
+COPY torrent-scan.sh /bin/torrent-scan.sh
+RUN chmod +x /bin/torrent-scan.sh
 
 # Copy and install the torrent scanning crontab entry
-COPY torrent-crontab /
-RUN /usr/bin/crontab /torrent-crontab
+COPY torrent-crontab /root/torrent-crontab
+RUN /usr/bin/crontab /root/torrent-crontab
 
-# Run Supervisord in the foreground as "sysadmin"
-CMD [ "/usr/bin/supervisord" ]
+# No need to setup a CMD directive since that was handled in the FROM container.

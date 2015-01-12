@@ -1,2 +1,2 @@
 # min hou dom mon dow usercommand
-   *   *   *   *   *  /torrent-scan.sh > /dev/console
+   *   *   *   *   *  /bin/torrent-scan.sh > /dev/console
