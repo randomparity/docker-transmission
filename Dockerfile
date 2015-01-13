@@ -12,7 +12,7 @@ RUN apt-get install -qy software-properties-common
 
 # Add the Transmission repository and install the transmission application
 RUN add-apt-repository -y ppa:transmissionbt/ppa && \
-    apt-get -qq update && \
+    apt-get -q update && \
     apt-get -qy install transmission-daemon
 
 # Clean-up any unneeded files
