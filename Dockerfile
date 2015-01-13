@@ -1,7 +1,8 @@
 FROM randomparity/docker-supervisor:latest
 
 MAINTAINER David Christensen <randomparity@gmail.com>
-ENV LAST_UPDATE 2014-01-12
+
+ENV LAST_UPDATE_TRANSMISSION 2015-01-12
 
 # We depend on the FROM container to have the relevant updates
 # installed thus we don't take care of that here.
