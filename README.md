@@ -28,10 +28,10 @@ All Docker configuration files are mounted from `/etc/docker/<container name>`.
 Quick-start
 -----------
 
-    sudo docker run -d --restart always -h transmission --name transmission -v /mnt/download:/download -v /etc/docker/transmission:/config -v /etc/localtime:/etc/localtime:ro -p 9091:9091 -p 51413:51413 -p 51413:51413/udp randomparity/docker-transmission
+`sudo docker run -d --restart always -h transmission --name transmission -v /mnt/download:/download -v /etc/docker/transmission:/config -v /etc/localtime:/etc/localtime:ro -p 9091:9091 -p 51413:51413 -p 51413:51413/udp randomparity/docker-transmission`
 
 
-Then open http://<host IP>:9091 in a browser to access the Transmissioni web UI.
+Then open http://<docker host IP>:9091 in a browser to access the Transmissioni web UI.
 
 Details
 -------

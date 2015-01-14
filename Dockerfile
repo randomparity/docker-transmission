@@ -18,10 +18,10 @@ RUN add-apt-repository -y ppa:transmissionbt/ppa && \
 # Clean-up any unneeded files
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/tmp/* && \
     rm -rf /tmp/*
 
-VOLUME ["/config"]
-VOLUME ["/download"]
+VOLUME ["/config", "/download"]
 
 # Used by transmission daemon to set default configuration data location
 ENV TRANSMISSION_HOME /config
@@ -40,4 +40,4 @@ RUN chmod +x /bin/torrent-scan.sh
 COPY torrent-crontab /root/torrent-crontab
 RUN /usr/bin/crontab /root/torrent-crontab
 
-# No need to setup a CMD directive since that was handled in the FROM container.
+# No need to setup a CMD directive since that was handled in the FROM image.
