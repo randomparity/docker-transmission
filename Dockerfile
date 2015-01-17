@@ -2,7 +2,7 @@ FROM randomparity/docker-supervisor:latest
 
 MAINTAINER David Christensen <randomparity@gmail.com>
 
-ENV LAST_UPDATE_TRANSMISSION 2015-01-14
+ENV LAST_UPDATE_TRANSMISSION 2015-01-16
 
 # We depend on the FROM container to have the relevant updates
 # installed thus we don't take care of that here.
@@ -27,6 +27,7 @@ EXPOSE 9091 51413
 
 # Copy the supervisord configuration files into the container
 COPY transmission.conf /etc/supervisor/conf.d/transmission.conf
+RUN echo "user=$BASE_USER" >> /etc/supervisor/conf.d/transmission.conf
 COPY cron.conf /etc/supervisor/conf.d/cron.conf
 
 # Copy the torrent scan script into the container and make it executable

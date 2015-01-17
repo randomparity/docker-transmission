@@ -23,12 +23,18 @@ I use a NAS with a "download" share with the following structure:
   Download\Torrents           - Watch directory for .torrent files
   Download\Torrents\Working   - Working directory where "in progress" files are located
 
-All Docker configuration files are mounted from `/etc/docker/<container name>`.
+Host directory to container `VOLUME` mapping:
+
+| Host Directory | Container Directory | Comment |
+|----------------|---------------------|---------|
+| /mnt/download | /download | |
+| /etc/docker/transmission | /config | chmod 777 /etc/docker/transmission |
+| /etc/localtime | /etc/localtime | Set the container's TZ to match the host |
 
 Quick-start
 -----------
 
-`sudo docker run -d --restart always -h transmission --name transmission -v /mnt/download:/download -v /etc/docker/transmission:/config -v /etc/localtime:/etc/localtime:ro -p 9091:9091 -p 51413:51413 -p 51413:51413/udp randomparity/docker-transmission`
+Run the command `sudo docker run -d --restart always -h transmission --name transmission -v /mnt/download:/download -v /etc/docker/transmission:/config -v /etc/localtime:/etc/localtime:ro -p 9091:9091 -p 51413:51413 -p 51413:51413/udp randomparity/docker-transmission`
 
 
 Then open http://<docker host IP>:9091 in a browser to access the Transmissioni web UI.
@@ -37,3 +43,4 @@ Details
 -------
 
 Since I use a NAS I've run into an issue when adding a .torrent file to the "watch" directory where Transmission refuses to see that the file has been added.  To work around this I've included a script which manually scans the "watch" directory every minute and uses the Transmission CLI add the torrent to the download queue.
+
