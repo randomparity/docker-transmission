@@ -1,19 +1,16 @@
 FROM randomparity/docker-supervisor:latest
-
 MAINTAINER David Christensen <randomparity@gmail.com>
 
-ENV LAST_UPDATE_TRANSMISSION 2015-01-16
-
-# We depend on the FROM container to have the relevant updates
-# installed thus we don't take care of that here.
+ENV TRANSMISSION_LAST_UPDATE 2015-01-27
 
 # Add the Transmission repository and install the transmission application
-RUN add-apt-repository -y ppa:transmissionbt/ppa && \
-    apt-get -q update && \
-    apt-get -qy install transmission-daemon
+RUN DEBIAN_FRONTEND=noninteractive add-apt-repository -y ppa:transmissionbt/ppa && \
+    DEBIAN_FRONTEND=noninteractive apt-get -q update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qy upgrade && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qy install transmission-daemon
 
 # Clean-up any unneeded files
-RUN apt-get clean && \
+RUN DEBIAN_FRONTEND=noninteractive apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/tmp/* && \
     rm -rf /tmp/*
