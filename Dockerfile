@@ -1,7 +1,7 @@
 FROM randomparity/docker-supervisor:latest
 MAINTAINER David Christensen <randomparity@gmail.com>
 
-ENV TRANSMISSION_LAST_UPDATE 2015-01-27
+ENV TRANSMISSION_LAST_UPDATE 2015-07-23
 
 # Add the Transmission repository and install the transmission application
 RUN DEBIAN_FRONTEND=noninteractive add-apt-repository -y ppa:transmissionbt/ppa && \
