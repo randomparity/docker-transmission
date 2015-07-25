@@ -1,0 +1,1 @@
+docker run -d --restart always -h transmission --name transmission -v /mnt/docker/download:/download -v /mnt/docker/transmission:/config -v /etc/localtime:/etc/localtime:ro -v /etc/apt/apt-conf.d/01proxy:/etc/apt/apt-conf.d/01proxy:ro -p 9091:9091 -p 51413:51413 -p 51413:51413/udp randomparity/docker-transmission:latest
